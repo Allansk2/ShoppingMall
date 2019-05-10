@@ -1,6 +1,7 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
+apply plugin: 'kotlin-android-extensions'
 
 
 android {
@@ -72,5 +73,5 @@ dependencies {
 
     // Dagger2
     api "com.google.dagger:dagger:${dagger_version}"
-    annotationProcessor "com.google.dagger:dagger-compiler:${dagger_version}"
+    kapt "com.google.dagger:dagger-compiler:${dagger_version}"
 }

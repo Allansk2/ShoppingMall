@@ -6,22 +6,27 @@ import com.allan.user.center.data.repository.UserRepository
 import com.allan.user.center.service.UserService
 import io.reactivex.Observable
 import io.reactivex.functions.Function
+import javax.inject.Inject
 
 
-class UserServiceImpl : UserService {
+class UserServiceImpl @Inject constructor() : UserService {
+    @Inject
+    lateinit var repository: UserRepository
+
     override fun register(mobile: String, verifyCode: String, pwd: String): Observable<Boolean> {
-        val repository = UserRepository()
 
-        return repository.register(mobile, pwd, verifyCode).flatMap(
-            object : Function<BaseResp<String>, Observable<Boolean>> {
-                override fun apply(t: BaseResp<String>): Observable<Boolean> {
-                    if (t.status != 0) {
-                        return Observable.error(BaseExeception(t.status, t.message))
-                    }
+        return Observable.just(true)
 
-                    return Observable.just(true)
-                }
-            }
-        )
+//        return repository.register(mobile, pwd, verifyCode).flatMap(
+//            object : Function<BaseResp<String>, Observable<Boolean>> {
+//                override fun apply(t: BaseResp<String>): Observable<Boolean> {
+//                    if (t.status != 0) {
+//                        return Observable.error(BaseExeception(t.status, t.message))
+//                    }
+//
+//                    return Observable.just(true)
+//                }
+//            }
+//        )
     }
 }
