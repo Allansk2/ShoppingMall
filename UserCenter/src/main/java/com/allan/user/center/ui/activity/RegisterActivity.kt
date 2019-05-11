@@ -1,7 +1,7 @@
 package com.allan.user.center.ui.activity
 
 import android.os.Bundle
-import android.view.View
+import com.allan.base.library.common.AppManager
 import com.allan.base.library.ext.onClick
 import com.allan.base.library.ui.activity.BaseMvpActivity
 import com.allan.user.center.R
@@ -47,4 +47,16 @@ class RegisterActivity : BaseMvpActivity<RegisterPresenter>(), RegisterView {
 
     }
 
+
+    private var pressTime: Long = 0
+
+    override fun onBackPressed() {
+        val time = System.currentTimeMillis()
+        if (time - pressTime > 2000) {
+            pressTime = time
+            toast("再按一次退出程序")
+        } else {
+            AppManager.instance.exitApp(this)
+        }
+    }
 }
