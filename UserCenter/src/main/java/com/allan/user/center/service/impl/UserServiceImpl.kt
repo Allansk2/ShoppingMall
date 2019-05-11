@@ -13,8 +13,8 @@ class UserServiceImpl @Inject constructor() : UserService {
 
     override fun register(mobile: String, verifyCode: String, pwd: String): Observable<Boolean> {
 
-//        return Observable.just(true)
+        return Observable.just(true)
 
-        return repository.register(mobile, pwd, verifyCode).convertBoolean()
+//        return repository.register(mobile, pwd, verifyCode).convertBoolean()
     }
 }

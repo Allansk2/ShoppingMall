@@ -18,5 +18,8 @@ open class BaseObserver<T>(val baseView: BaseView) : Observer<T> {
 
     override fun onError(e: Throwable) {
         baseView.hideLoading()
+        if (e is BaseExeception) {
+            baseView.onError(e.msg)
+        }
     }
 }

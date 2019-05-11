@@ -1,7 +1,9 @@
 package com.allan.user.center.ui.activity
 
 import android.os.Bundle
+import android.view.View
 import com.allan.base.library.common.AppManager
+import com.allan.base.library.ext.enable
 import com.allan.base.library.ext.onClick
 import com.allan.base.library.ui.activity.BaseMvpActivity
 import com.allan.user.center.R
@@ -9,12 +11,12 @@ import com.allan.user.center.injection.component.DaggerUserComponent
 import com.allan.user.center.injection.module.UserModule
 import com.allan.user.center.view.RegisterView
 import com.allan.user.presenter.RegisterPresenter
-import com.kotlin.base.widgets.VerifyButton
 import kotlinx.android.synthetic.main.activity_register.*
 import org.jetbrains.anko.toast
 
 
-class RegisterActivity : BaseMvpActivity<RegisterPresenter>(), RegisterView {
+class RegisterActivity : BaseMvpActivity<RegisterPresenter>(), RegisterView, View.OnClickListener {
+
     override fun onRegisterResult(result: String) {
         toast(result)
     }
@@ -23,35 +25,23 @@ class RegisterActivity : BaseMvpActivity<RegisterPresenter>(), RegisterView {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register)
 
-//        mRegisterBtn.setOnClickListener {
-//            mPresenter.register(mMobileEt.text.toString(), mVerifyCodeEt.text.toString(), mPwdEt.text.toString())
-//        }
+        initView()
+    }
 
-//        mRegisterBtn.onClick(object : View.OnClickListener {
-//            override fun onClick(v: View?) {
-//                mPresenter.register(mMobileEt.text.toString(), mVerifyCodeEt.text.toString(), mPwdEt.text.toString())
-//
-//            }
-//        })
+    private fun initView() {
+        mRegisterBtn.onClick(this)
+        mVerifyCodeBtn.onClick(this)
 
-        mRegisterBtn.onClick {
-            mPresenter.register(mMobileEt.text.toString(), mVerifyCodeEt.text.toString(), mPwdEt.text.toString())
-        }
-
-        mGetVerifyCodeBtn.setOnVerifyBtnClick(object : VerifyButton.OnVerifyBtnClick {
-            override fun onClick() {
-                toast("获取验证码")
-            }
-        })
-        mGetVerifyCodeBtn.onClick {
-            mGetVerifyCodeBtn.requestSendVerifyNumber()
-        }
+        mRegisterBtn.enable(mMobileEt, {isButtonEnable()})
+        mRegisterBtn.enable(mVerifyCodeEt, {isButtonEnable()})
+        mRegisterBtn.enable(mPwdEt, {isButtonEnable()})
+        mRegisterBtn.enable(mPwdConfirmEt, {isButtonEnable()})
     }
 
     override fun initInjection() {
         DaggerUserComponent.builder().activityComponent(activityComponent).userModule(UserModule()).build().inject(this)
-        mPresenter.mView = this
 
+        mPresenter.mView = this
     }
 
 
@@ -65,5 +55,24 @@ class RegisterActivity : BaseMvpActivity<RegisterPresenter>(), RegisterView {
         } else {
             AppManager.instance.exitApp(this)
         }
+    }
+
+    override fun onClick(view: View?) {
+        when (view?.id) {
+            R.id.mVerifyCodeBtn -> {
+                mVerifyCodeBtn.requestSendVerifyNumber()
+                toast("发送验证码成功")
+            }
+            R.id.mRegisterBtn -> {
+                mPresenter.register(mMobileEt.text.toString(), mVerifyCodeEt.text.toString(), mPwdEt.text.toString())
+            }
+        }
+    }
+
+    private fun isButtonEnable(): Boolean {
+        return mMobileEt.text.isNullOrEmpty().not() &&
+                mVerifyCodeEt.text.isNullOrEmpty().not() &&
+                mPwdEt.text.isNullOrEmpty().not() &&
+                mPwdConfirmEt.text.isNullOrEmpty().not()
     }
 }
