@@ -18,7 +18,9 @@ class RegisterPresenter @Inject constructor() : BasePresenter<RegisterView>() {
     fun register(mobile: String, verifyCode: String, pwd: String) {
         userService.register(mobile, verifyCode, pwd).execute(object : BaseObserver<Boolean>() {
             override fun onNext(t: Boolean) {
-                mView.onRegisterResult(t)
+                if (t) {
+                    mView.onRegisterResult("注册成功")
+                }
             }
         }, lifecycleProvider)
     }

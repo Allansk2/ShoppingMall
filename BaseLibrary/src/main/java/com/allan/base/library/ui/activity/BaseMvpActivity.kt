@@ -11,7 +11,7 @@ import com.allan.base.library.presenter.view.BaseView
 import javax.inject.Inject
 
 
-open class BaseMvpActivity<T : BasePresenter<*>> : BaseActivity(), BaseView {
+open abstract class BaseMvpActivity<T : BasePresenter<*>> : BaseActivity(), BaseView {
 
 
     override fun showLoading() {
@@ -33,7 +33,10 @@ open class BaseMvpActivity<T : BasePresenter<*>> : BaseActivity(), BaseView {
         super.onCreate(savedInstanceState)
 
         initActivityInjection()
+        initInjection()
     }
+
+    abstract fun initInjection()
 
     lateinit var activityComponent: ActivityComponent
 
