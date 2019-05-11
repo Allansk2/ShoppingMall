@@ -11,13 +11,15 @@
             android:supportsRtl="true"
             android:theme="@style/AppTheme"
             android:name="com.allan.base.library.common.BaseApplication">
-        <activity android:name=".ui.activity.RegisterActivity">
+        <activity android:name=".ui.activity.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
+
+        <activity android:name=".ui.activity.RegisterActivity" />
     </application>
 
 </manifest>

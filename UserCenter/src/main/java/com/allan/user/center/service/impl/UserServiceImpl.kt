@@ -1,6 +1,7 @@
 package com.allan.user.center.service.impl
 
-import com.allan.base.library.ext.convertBoolean
+import com.allan.base.library.ext.convert
+import com.allan.user.center.data.protocol.UserInfo
 import com.allan.user.center.data.repository.UserRepository
 import com.allan.user.center.service.UserService
 import io.reactivex.Observable
@@ -8,6 +9,8 @@ import javax.inject.Inject
 
 
 class UserServiceImpl @Inject constructor() : UserService {
+
+
     @Inject
     lateinit var repository: UserRepository
 
@@ -16,5 +19,12 @@ class UserServiceImpl @Inject constructor() : UserService {
         return Observable.just(true)
 
 //        return repository.register(mobile, pwd, verifyCode).convertBoolean()
+    }
+
+    override fun login(mobile: String, pwd: String, pushId: String): Observable<UserInfo> {
+//        return Observable.just(true)
+
+        return repository.login(mobile, pwd, pushId).convert()
+
     }
 }
