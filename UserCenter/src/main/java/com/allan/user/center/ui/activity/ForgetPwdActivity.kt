@@ -6,35 +6,35 @@ import com.allan.base.library.ext.enable
 import com.allan.base.library.ext.onClick
 import com.allan.base.library.ui.activity.BaseMvpActivity
 import com.allan.user.center.R
-import com.allan.user.center.data.protocol.UserInfo
 import com.allan.user.center.injection.component.DaggerUserComponent
 import com.allan.user.center.injection.module.UserModule
-import com.allan.user.center.view.LoginView
-import com.allan.user.presenter.LoginPresenter
-import kotlinx.android.synthetic.main.activity_login.*
+import com.allan.user.center.view.ForgetPwdView
+import com.allan.user.presenter.ForgetPwdPresenter
+import kotlinx.android.synthetic.main.activity_forget_pwd.*
 import org.jetbrains.anko.startActivity
 import org.jetbrains.anko.toast
 
 
-class ForgetPwdActivity : BaseMvpActivity<LoginPresenter>(), LoginView, View.OnClickListener {
+class ForgetPwdActivity : BaseMvpActivity<ForgetPwdPresenter>(), ForgetPwdView, View.OnClickListener {
 
-    override fun onLoginResult(result: UserInfo) {
-        toast(result.toString())
+    override fun onForgetPwdResult(result: String) {
+        toast(result)
+        startActivity<ResetPwdActivity>("mobile" to mMobileEt.text.toString())
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_login)
+        setContentView(R.layout.activity_forget_pwd)
 
         initView()
     }
 
     private fun initView() {
-        mLoginBtn.onClick(this)
-        mHeaderBar.getRightView().onClick(this)
+        mNextBtn.onClick(this)
+        mVerifyCodeBtn.onClick(this)
 
-        mLoginBtn.enable(mMobileEt, { isButtonEnable() })
-        mLoginBtn.enable(mPwdEt, { isButtonEnable() })
+        mNextBtn.enable(mMobileEt, { isButtonEnable() })
+        mNextBtn.enable(mVerifyCodeEt, { isButtonEnable() })
     }
 
     override fun initInjection() {
@@ -46,18 +46,19 @@ class ForgetPwdActivity : BaseMvpActivity<LoginPresenter>(), LoginView, View.OnC
 
     override fun onClick(view: View?) {
         when (view?.id) {
-            R.id.mRightTv -> {
-                startActivity<RegisterActivity>()
+            R.id.mVerifyCodeBtn -> {
+                mVerifyCodeBtn.requestSendVerifyNumber()
+                toast("发送验证码成功")
             }
 
-            R.id.mLoginBtn -> {
-                mPresenter.login(mMobileEt.text.toString(), mPwdEt.text.toString(), "")
+            R.id.mNextBtn -> {
+                mPresenter.forgetPwd(mMobileEt.text.toString(), mVerifyCodeEt.text.toString())
             }
         }
     }
 
     private fun isButtonEnable(): Boolean {
         return mMobileEt.text.isNullOrEmpty().not() &&
-                mPwdEt.text.isNullOrEmpty().not()
+                mVerifyCodeEt.text.isNullOrEmpty().not()
     }
 }
