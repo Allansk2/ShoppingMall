@@ -1,8 +1,8 @@
 package com.allan.base.library.ui.activity
 
-import androidx.appcompat.app.AppCompatActivity
+import com.trello.rxlifecycle3.components.support.RxAppCompatActivity
 
 
-open class BaseActivity : AppCompatActivity() {
+open class BaseActivity : RxAppCompatActivity() {
 
 }
