@@ -9,6 +9,7 @@ import com.allan.user.center.injection.component.DaggerUserComponent
 import com.allan.user.center.injection.module.UserModule
 import com.allan.user.center.view.RegisterView
 import com.allan.user.presenter.RegisterPresenter
+import com.kotlin.base.widgets.VerifyButton
 import kotlinx.android.synthetic.main.activity_register.*
 import org.jetbrains.anko.toast
 
@@ -37,7 +38,13 @@ class RegisterActivity : BaseMvpActivity<RegisterPresenter>(), RegisterView {
             mPresenter.register(mMobileEt.text.toString(), mVerifyCodeEt.text.toString(), mPwdEt.text.toString())
         }
 
-        mGetVerifyCodeBtn.setOnClickListener {
+        mGetVerifyCodeBtn.setOnVerifyBtnClick(object : VerifyButton.OnVerifyBtnClick {
+            override fun onClick() {
+                toast("获取验证码")
+            }
+        })
+        mGetVerifyCodeBtn.onClick {
+            mGetVerifyCodeBtn.requestSendVerifyNumber()
         }
     }
 

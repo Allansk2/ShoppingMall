@@ -8,6 +8,7 @@ import com.allan.base.library.injection.module.ActivityModule
 import com.allan.base.library.injection.module.LifeCycleProviderModule
 import com.allan.base.library.presenter.BasePresenter
 import com.allan.base.library.presenter.view.BaseView
+import org.jetbrains.anko.toast
 import javax.inject.Inject
 
 
@@ -22,8 +23,8 @@ open abstract class BaseMvpFragment<T : BasePresenter<*>> : BaseFragment(), Base
 
     }
 
-    override fun onError() {
-
+    override fun onError(text: String) {
+        toast(text)
     }
 
     @Inject

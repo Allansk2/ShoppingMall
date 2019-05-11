@@ -1,5 +1,6 @@
 package com.allan.user.presenter
 
+import android.util.Log
 import com.allan.base.library.ext.execute
 import com.allan.base.library.presenter.BasePresenter
 import com.allan.base.library.rx.BaseObserver
@@ -16,10 +17,15 @@ class RegisterPresenter @Inject constructor() : BasePresenter<RegisterView>() {
     lateinit var userService: UserService
 
     fun register(mobile: String, verifyCode: String, pwd: String) {
-        userService.register(mobile, verifyCode, pwd).execute(object : BaseObserver<Boolean>() {
+        if (!checkNetwork()) {
+            return
+        }
+        mView.showLoading()
+        userService.register(mobile, verifyCode, pwd).execute(object : BaseObserver<Boolean>(mView) {
             override fun onNext(t: Boolean) {
                 if (t) {
                     mView.onRegisterResult("注册成功")
+                    mView.hideLoading()
                 }
             }
         }, lifecycleProvider)
@@ -31,7 +37,7 @@ class RegisterPresenter @Inject constructor() : BasePresenter<RegisterView>() {
         userService.register(mobile, "", pwd)
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeOn(Schedulers.io())
-            .subscribe(object : BaseObserver<Boolean>() {
+            .subscribe(object : BaseObserver<Boolean>(mView) {
                 override fun onNext(t: Boolean) {
 
                 }

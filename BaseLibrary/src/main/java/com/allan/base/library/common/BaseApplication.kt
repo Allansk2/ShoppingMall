@@ -1,6 +1,7 @@
 package com.allan.base.library.common
 
 import android.app.Application
+import android.content.Context
 import com.allan.base.library.injection.component.AppComponent
 import com.allan.base.library.injection.component.DaggerAppComponent
 import com.allan.base.library.injection.module.AppModule
@@ -13,9 +14,15 @@ class BaseApplication : Application() {
         super.onCreate()
 
         initAppInjection()
+
+        context = this
     }
 
     private fun initAppInjection() {
         appComponent = DaggerAppComponent.builder().appModule(AppModule(this)).build()
+    }
+
+    companion object {
+        lateinit var context: Context
     }
 }

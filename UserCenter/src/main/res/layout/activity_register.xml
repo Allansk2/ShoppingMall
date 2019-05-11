@@ -1,9 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto"
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
+
+    <com.allan.base.library.widget.HeaderBar
+            style="@style/MatchWrap"
+            app:isShowBack="false"
+            app:titleText="注册"
+            app:rightText="登录"
+    >
+
+    </com.allan.base.library.widget.HeaderBar>
 
     <LinearLayout
             android:layout_width="match_parent"
@@ -18,7 +28,7 @@
                 android:hint="请输入手机号码"
         />
 
-        <Button
+        <com.kotlin.base.widgets.VerifyButton
                 android:id="@+id/mGetVerifyCodeBtn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

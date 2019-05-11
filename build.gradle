@@ -19,6 +19,10 @@ buildscript {
     // Rxlifecycle
     ext.rx_lifecycle_version = '3.0.0'
 
+    // Glide
+    ext.glide_version = "3.7.0"
+
+
     repositories {
         google()
         jcenter()
