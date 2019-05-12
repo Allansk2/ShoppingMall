@@ -1,19 +1,23 @@
 package com.allan.base.library.ext
 
+import android.graphics.drawable.AnimationDrawable
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
+import com.allan.base.library.R
 import com.allan.base.library.data.protocol.BaseResp
 import com.allan.base.library.rx.BaseFunc
 import com.allan.base.library.rx.BaseFuncBoolean
 import com.allan.base.library.rx.BaseObserver
+import com.kennyc.view.MultiStateView
 import com.kotlin.base.utils.GlideUtils
 import com.kotlin.base.widgets.DefaultTextWatcher
 import com.trello.rxlifecycle3.LifecycleProvider
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
+import org.jetbrains.anko.find
 
 
 fun <T> Observable<T>.execute(observer: BaseObserver<T>, lifecycleProvider: LifecycleProvider<*>) {
@@ -57,3 +61,14 @@ fun ImageView.loadUrl(url: String) {
     GlideUtils.loadUrlImage(context, url, this)
 }
 
+
+fun MultiStateView.startLoading(){
+    viewState = MultiStateView.VIEW_STATE_LOADING
+    val loadingView = getView(MultiStateView.VIEW_STATE_LOADING)
+    val animBackground = loadingView!!.find<View>(R.id.loading_anim_view).background
+    (animBackground as AnimationDrawable).start()
+}
+
+fun View.setVisible(visible:Boolean){
+    this.visibility = if (visible) View.VISIBLE else View.GONE
+}

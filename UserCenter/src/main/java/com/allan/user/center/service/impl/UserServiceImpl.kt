@@ -23,9 +23,9 @@ class UserServiceImpl @Inject constructor() : UserService {
 
     override fun login(mobile: String, pwd: String, pushId: String): Observable<UserInfo> {
         val userInfo = UserInfo("1", "icon", "name", "gender", "mobile", "sign")
-        return Observable.just(userInfo)
+//        return Observable.just(userInfo)
 
-//        return repository.login(mobile, pwd, pushId).convert()
+        return repository.login(mobile, pwd, pushId).convert()
 
     }
 

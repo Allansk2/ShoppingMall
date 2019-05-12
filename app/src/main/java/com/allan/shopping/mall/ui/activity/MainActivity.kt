@@ -3,6 +3,7 @@ package com.allan.shopping.mall.ui.activity
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import com.allan.base.library.ui.activity.BaseActivity
+import com.allan.goodscenter.ui.fragment.CategoryFragment
 import com.allan.shopping.mall.R
 import com.allan.shopping.mall.ui.fragment.HomeFragment
 import com.allan.shopping.mall.ui.fragment.MeFragment
@@ -14,7 +15,7 @@ class MainActivity : BaseActivity() {
 
     private val mStack = Stack<Fragment>()
     private val mHomeFragment by lazy { HomeFragment() }
-    private val mCategoryFragment by lazy { HomeFragment() }
+    private val mCategoryFragment by lazy { CategoryFragment() }
     private val mCartFragment by lazy { HomeFragment() }
     private val mMsgFragment by lazy { HomeFragment() }
     private val mMeFragment by lazy { MeFragment() }

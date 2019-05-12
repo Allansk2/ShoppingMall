@@ -104,4 +104,15 @@ dependencies {
     api 'com.github.shts:TriangleLabelView:1.1.2'
 
     api 'com.github.crosswall:Android-Coverflow:release-v1.0.5'
+
+    // MulitStateView
+    api "com.github.Kennyc1012:MultiStateView:1.3.2"
+
+    //
+    api 'cn.bingoogolapple:bga-refreshlayout:1.1.7@aar'
+
+    api 'com.eightbitlab:rxbus:1.0.2'
+
+    //FlowLayout
+    api 'com.zhy:flowlayout-lib:1.0.3'
 }
