@@ -3,10 +3,12 @@ package com.allan.base.library.ext
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
+import android.widget.ImageView
 import com.allan.base.library.data.protocol.BaseResp
 import com.allan.base.library.rx.BaseFunc
 import com.allan.base.library.rx.BaseFuncBoolean
 import com.allan.base.library.rx.BaseObserver
+import com.kotlin.base.utils.GlideUtils
 import com.kotlin.base.widgets.DefaultTextWatcher
 import com.trello.rxlifecycle3.LifecycleProvider
 import io.reactivex.Observable
@@ -48,6 +50,10 @@ fun Button.enable(et: EditText, method: () -> Boolean) {
             btn.isEnabled = method()
         }
     })
+}
 
+
+fun ImageView.loadUrl(url: String) {
+    GlideUtils.loadUrlImage(context, url, this)
 }
 
