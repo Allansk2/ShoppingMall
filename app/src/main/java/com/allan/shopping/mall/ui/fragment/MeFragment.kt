@@ -8,9 +8,14 @@ import com.allan.base.library.ext.loadUrl
 import com.allan.base.library.ext.onClick
 import com.allan.base.library.ui.fragment.BaseFragment
 import com.allan.shopping.mall.R
+import com.allan.user.center.ui.activity.LoginActivity
+import com.allan.user.center.ui.activity.UserInfoActivity
 import com.kotlin.base.utils.AppPrefsUtils
 import com.kotlin.provider.common.ProviderConstant
+import com.kotlin.provider.common.afterLogin
+import com.kotlin.provider.common.isLogined
 import kotlinx.android.synthetic.main.fragment_me.*
+import org.jetbrains.anko.support.v4.startActivity
 
 class MeFragment : BaseFragment(), View.OnClickListener {
 
@@ -46,9 +51,7 @@ class MeFragment : BaseFragment(), View.OnClickListener {
     }
 
     private fun loadData() {
-//        if (isLogined()) {
-        val isLogined = false
-        if (isLogined) {
+        if (isLogined()) {
             val userIcon = AppPrefsUtils.getString(ProviderConstant.KEY_SP_USER_ICON)
             if (userIcon.isNotEmpty()) {
                 mUserIconIv.loadUrl(userIcon)
@@ -63,11 +66,16 @@ class MeFragment : BaseFragment(), View.OnClickListener {
 
     override fun onClick(view: View) {
         when (view.id) {
-//            R.id.mUserIconIv, R.id.mUserNameTv -> {
+            R.id.mUserIconIv, R.id.mUserNameTv -> {
+                if (isLogined()) {
+                    startActivity<UserInfoActivity>()
+                } else {
+                    startActivity<LoginActivity>()
+                }
 //                afterLogin {
 //                    startActivity<UserInfoActivity>()
 //                }
-//            }
+            }
 //
 //            R.id.mWaitPayOrderTv -> {
 //                startActivity<OrderActivity>(OrderConstant.KEY_ORDER_STATUS to OrderStatus.ORDER_WAIT_PAY)

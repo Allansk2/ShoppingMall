@@ -18,7 +18,7 @@ import org.jetbrains.anko.startActivity
 class LoginActivity : BaseMvpActivity<LoginPresenter>(), LoginView, View.OnClickListener {
 
     override fun onLoginResult(result: UserInfo) {
-        startActivity<UserInfoActivity>()
+        finish()
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
