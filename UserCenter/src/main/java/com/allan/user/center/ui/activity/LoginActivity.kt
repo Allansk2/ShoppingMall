@@ -13,13 +13,12 @@ import com.allan.user.center.view.LoginView
 import com.allan.user.presenter.LoginPresenter
 import kotlinx.android.synthetic.main.activity_login.*
 import org.jetbrains.anko.startActivity
-import org.jetbrains.anko.toast
 
 
 class LoginActivity : BaseMvpActivity<LoginPresenter>(), LoginView, View.OnClickListener {
 
     override fun onLoginResult(result: UserInfo) {
-        toast(result.toString())
+        startActivity<UserInfoActivity>()
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
