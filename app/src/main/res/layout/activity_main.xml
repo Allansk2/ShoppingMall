@@ -12,6 +12,7 @@
     </FrameLayout>
 
     <com.allan.base.library.widget.BottomNavBar
+            android:id="@+id/mBottomNavBar"
             style="@style/MatchWrap"
             android:layout_gravity="bottom">
 
