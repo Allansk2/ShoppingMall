@@ -86,19 +86,20 @@ dependencies {
     // Circle ImageView
     api "de.hdodenhof:circleimageview:${circle_imageView_version}"
 
-    //Take Photo
+    // Take Photo
     api "com.jph.takephoto:takephoto_library:${take_photo_version}"
 
-    //Alert View
+    // Alert View
     api "com.bigkoo:alertview:${alert_view_version}"
 
     // Bottom navigation bar
     api 'com.ashokvarma.android:bottom-navigation-bar:2.1.0'
 
-    //Banner
+    // Banner
     api 'com.youth.banner:banner:1.4.10'
 
-//    api 'com.github.shts:TriangleLabelView:1.1.2'
-//
+    // Triangle label
+    api 'com.github.shts:TriangleLabelView:1.1.2'
+
 //    api 'com.github.crosswall:Android-Coverflow:release-v1.0.4'
 }
