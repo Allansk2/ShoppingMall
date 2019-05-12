@@ -40,4 +40,6 @@ dependencies {
     if (isUserModule.toBoolean()) {
         implementation project(':UserCenter')
     }
+    implementation project(':MessageCenter')
+
 }

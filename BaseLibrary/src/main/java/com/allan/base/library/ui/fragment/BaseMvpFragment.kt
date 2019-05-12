@@ -8,7 +8,7 @@ import com.allan.base.library.injection.module.ActivityModule
 import com.allan.base.library.injection.module.LifeCycleProviderModule
 import com.allan.base.library.presenter.BasePresenter
 import com.allan.base.library.presenter.view.BaseView
-import org.jetbrains.anko.toast
+import org.jetbrains.anko.support.v4.toast
 import javax.inject.Inject
 
 
@@ -43,8 +43,8 @@ open abstract class BaseMvpFragment<T : BasePresenter<*>> : BaseFragment(), Base
 
     private fun initActivityInjection() {
         activityComponent =
-            DaggerActivityComponent.builder().appComponent((activity.application as BaseApplication).appComponent)
-                .activityModule(ActivityModule(activity))
+            DaggerActivityComponent.builder().appComponent((activity?.application as BaseApplication).appComponent)
+                .activityModule(ActivityModule(requireActivity()))
                 .lifeCycleProviderModule(LifeCycleProviderModule(this))
                 .build()
     }
