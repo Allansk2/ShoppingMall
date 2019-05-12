@@ -71,8 +71,8 @@ class UserInfoActivity : BaseMvpActivity<UserInfoPresenter>(), UserInfoView, Tak
 
 
     override fun takeSuccess(result: TResult?) {
-        Log.e("TakePhone", result?.image?.originalPath)
-        Log.e("TakePhone", result?.image?.compressPath)
+
+
     }
 
     override fun takeCancel() {
